@@ -23,7 +23,7 @@ jobs:
     - name: Removing previous chrome instances on runner 
       run: sudo apt purge google-chrome-stable  
     - name: Install Chrome
-      run: sudo apt-get -qqy install google-chrome-stable
+      run: sudo apt-get install google-chrome-stable
     - name: Chrome version
       run: chromium-browser -version
     - name: Install dependencies
@@ -32,7 +32,7 @@ jobs:
     - name: Install all necessary packages
       run: pip install webdriver-manager selenium 
     - name: Install chrome driver
-      uses: aicure/setup-chromedriver@master
+      uses: nanasess/setup-chromedriver@master
     - name: Install xvfb
       run: sudo apt-get install xvfb
     - name: Running the Python script
