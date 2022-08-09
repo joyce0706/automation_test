@@ -1,0 +1,52 @@
+from xml.dom.minidom import Element
+from h11 import CLIENT
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
+import time
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
+chrome_options = webdriver.ChromeOptions()    
+# Add your options as needed    
+options = [
+    "--window-size=1200,1200",
+    # "--ignore-certificate-errors"
+    # "--headless",
+    #"--disable-gpu",
+    #"--window-size=1920,1200",
+    #"--ignore-certificate-errors",
+    #"--disable-extensions",
+    #"--no-sandbox",
+    #"--disable-dev-shm-usage",
+    '--remote-debugging-port=9222'
+]
+
+for option in options:
+    chrome_options.add_argument(option)
+    
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options = chrome_options)
+
+driver.get("https://intg-sso-user.aicure.com/#/home/login")
+
+USER_NAME = "joyce.zhan+test@aicure.com"
+PASSWORD = "Autotest2022!"
+SEARCH_CLIENT = "client7"
+
+username = driver.find_element(By.ID, 'signupEmail')
+username.send_keys(USER_NAME)
+password = driver.find_element(By.ID, 'signupPassword')
+password.send_keys(PASSWORD)
+signBtn = driver.find_element(By.ID, 'signupSubmit')
+signBtn.send_keys(Keys.ENTER)
+
+try:
+    search = WebDriverWait(driver, 20).until(
+        EC.presence_of_element_located((By.ID, "searchId"))
+    )
+    
+finally:
+    driver.quit()
