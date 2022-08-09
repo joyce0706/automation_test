@@ -27,8 +27,6 @@ jobs:
         python -m pip install --upgrade pip
     - name: Install all necessary packages
       run: pip install webdriver-manager selenium 
-    - name: Install chrome driver
-      uses: nanasess/setup-chromedriver@master
     - name: Setup Chrome and chromedriver
       run: |
         wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
@@ -46,6 +44,8 @@ jobs:
         curl -L -O "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
         unzip chromedriver_linux64.zip && chmod +x chromedriver && sudo mv chromedriver /usr/local/bin
         chromedriver -version
+    - name: Install chrome driver
+      uses: nanasess/setup-chromedriver@master
     - name: Install xvfb
       run: sudo apt-get install xvfb
     - name: Launch browser
