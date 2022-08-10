@@ -48,10 +48,10 @@ jobs:
       uses: nanasess/setup-chromedriver@master
     - name: Install xvfb
       run: sudo apt-get install xvfb
-    - name: Launch browser
-      run: |
-        Xvfb :99 &
+#     - name: Launch browser
+#       run: |
+#         Xvfb :99 &
     - name: Running the Python script
       run: python SCDashboardTest
-      env:
-        DISPLAY: :99
+#       env:
+#         DISPLAY: :99
